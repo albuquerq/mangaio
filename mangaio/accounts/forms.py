@@ -9,8 +9,9 @@ from django.contrib.auth import (
 User = get_user_model()
 
 class AccountLoginForm(forms.Form):
-    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'input'}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'input'}))
+    attrs = {'class': 'input','required': True}
+    username = forms.CharField(widget=forms.TextInput(attrs=attrs))
+    password = forms.CharField(widget=forms.PasswordInput(attrs=attrs))
 
     def clean(self, *args, **kwargs):
         username = self.cleaned_data.get("username")
@@ -27,7 +28,7 @@ class AccountLoginForm(forms.Form):
 
 
 class RegisterAccountForm(forms.ModelForm):
-    attrs = {'class': 'input'} # Classe para se integrar com o framework Bulma.
+    attrs = {'class': 'input', 'required': True} # Classe para se integrar com o framework Bulma.
     
     username = forms.CharField(widget=forms.TextInput(attrs=attrs))
     email = forms.EmailField(label='Informe seu e-mail', widget=forms.EmailInput(attrs=attrs))
